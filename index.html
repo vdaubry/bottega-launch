@@ -144,11 +144,9 @@
     <article>
       <header class="post-head">
         <h1>I'm open-sourcing Bottega, our internal coding agent orchestration tool</h1>
-        <p class="lede">We shipped our 1000th user story with this tool, then open-sourced it. A year of building with coding agents, and why the plan — not the model — is the centerpiece.</p>
-        <p class="byline">Vincent Daubry · May 22, 2026</p>
       </header>
 
-      <p>We shipped the 1000th user story with this tool last week. To celebrate, I'm open-sourcing it.</p>
+      <p>We shipped the 1000th user story with our internal agent orchestration tool last week. To celebrate, I'm open-sourcing it: <a href="https://github.com/vdaubry/bottega" target="_blank" rel="noopener">Bottega repo</a></p>
       <p>We've been using Claude Code for more than a year now. Velocity has greatly increased, code quality too.</p>
       <p>I'm sharing my own conclusion on what works and what doesn't.</p>
       <p>We built this tool to formalize our current workflow. We wanted a tool that is minimalist, user-friendly, and easy to adapt.</p>
@@ -162,12 +160,12 @@
         <p><strong>The bigger lesson</strong>: we figured out how to successfully work <em>with</em> a coding agent. That lesson is platform-agnostic. The supplier we use to apply it may change, the workflow stands.</p>
 
         <h2>And some good news</h2>
-        <p>Back in February, we had a bug: Claude subprocesses were defaulting to Sonnet 3.7. We ran like that for two full weeks. We shipped dozens of tasks during this bug, unnoticed. Output quality was very similar.</p>
+        <p>Back in February, we had a bug on Bottega: Claude subprocesses were defaulting to Sonnet 3.7. We ran like that for two full weeks. We shipped dozens of tasks during this bug, unnoticed. Output quality was very similar.</p>
         <p class="arrow">with a tight enough harness and a rigorous enough process, the choice of model matters way less than people think.</p>
 
         <div class="opinion">
           <span class="tag">&lt;unpopular opinion&gt;</span>
-          <p>For most web development task, the most powerful frontier models (Opus 4.7, GPT 5.5) is mostly a walking stick for a broken process. A solid development workflow alongside a robust harness gets you comparable velocity and quality with much less powerful models.</p>
+          <p>For most web development task, the most powerful frontier models (Opus 4.7, GPT 5.5) is mostly a walking stick for a broken process. A solid development workflow alongside a robust harness gets us comparable velocity and quality with much less powerful models.</p>
           <span class="tag">&lt;/unpopular opinion&gt;</span>
         </div>
 
