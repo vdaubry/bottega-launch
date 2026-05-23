@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I'm open-sourcing Bottega, our internal coding agent orchestration tool</title>
+  <meta name="description" content="We shipped our 1000th user story with this tool, then open-sourced it. A year of building with coding agents, and why the plan — not the model — is the centerpiece." />
+  <meta property="og:title" content="I'm open-sourcing Bottega, our internal coding agent orchestration tool" />
+  <meta property="og:description" content="We shipped our 1000th user story with this tool, then open-sourced it. A year of building with coding agents, and why the plan — not the model — is the centerpiece." />
+  <meta property="og:type" content="article" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1c1e21;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #2563eb;
+      --code-bg: #f4f5f7;
+      --callout-bg: #f9fafb;
+      --callout-border: #d1d5db;
+      --maxw: 44rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1115;
+        --text: #e7e9ee;
+        --muted: #9aa3b2;
+        --border: #242a35;
+        --accent: #7aa2f7;
+        --code-bg: #1a1d24;
+        --callout-bg: #161a21;
+        --callout-border: #2a313d;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 4rem 1.25rem 6rem;
+    }
+    header.post-head { margin-bottom: 2.5rem; }
+    h1 {
+      font-size: 2rem;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin: 0 0 1rem;
+      font-weight: 700;
+    }
+    .lede {
+      font-size: 1.15rem;
+      color: var(--muted);
+      margin: 0 0 1.25rem;
+      line-height: 1.55;
+    }
+    .byline {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h2 {
+      font-size: 1.4rem;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      margin: 3rem 0 1rem;
+      font-weight: 650;
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin: 2rem 0 0.75rem;
+      font-weight: 650;
+    }
+    p { margin: 0 0 1.2rem; }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    }
+    a:hover { border-bottom-color: var(--accent); }
+    ul { margin: 0 0 1.2rem; padding-left: 1.4rem; }
+    li { margin: 0.4rem 0; }
+    strong { font-weight: 650; }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.88em;
+      background: var(--code-bg);
+      padding: 0.15em 0.4em;
+      border-radius: 5px;
+    }
+    .arrow { color: var(--text); }
+    .arrow::before { content: "→ "; color: var(--accent); font-weight: 600; }
+    /* Big intro note */
+    aside.callout {
+      background: var(--callout-bg);
+      border: 1px solid var(--callout-border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 1.5rem 1.5rem 0.5rem;
+      margin: 2.5rem 0;
+    }
+    aside.callout h2:first-child { margin-top: 0; }
+    aside.callout h2 { font-size: 1.2rem; }
+    /* unpopular opinion tag block */
+    .opinion {
+      margin: 1.5rem 0;
+      padding-left: 1rem;
+      border-left: 2px dashed var(--callout-border);
+    }
+    .opinion .tag {
+      display: block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .opinion p { margin: 0.4rem 0; font-style: italic; }
+    footer.post-foot {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <article>
+      <header class="post-head">
+        <h1>I'm open-sourcing Bottega, our internal coding agent orchestration tool</h1>
+        <p class="lede">We shipped our 1000th user story with this tool, then open-sourced it. A year of building with coding agents, and why the plan — not the model — is the centerpiece.</p>
+        <p class="byline">Vincent Daubry · May 22, 2026</p>
+      </header>
+
+      <p>We shipped the 1000th user story with this tool last week. To celebrate, I'm open-sourcing it.</p>
+      <p>We've been using Claude Code for more than a year now. Velocity has greatly increased, code quality too.</p>
+      <p>I'm sharing my own conclusion on what works and what doesn't.</p>
+      <p>We built this tool to formalize our current workflow. We wanted a tool that is minimalist, user-friendly, and easy to adapt.</p>
+
+      <aside class="callout">
+        <h2>A note before you read this — The End of the Token Subsidy Era</h2>
+        <p>Anthropic just announced new pricing for Claude Code subscribers. The era of tokens that felt unlimited is slowly coming to an end.</p>
+        <p>Just when I was opensourcing this project, I love the irony. But Bottega's orchestration layer is easily extendable to add support for multiple providers.</p>
+        <p>So following Anthropic's pricing announcement, we added support for Codex and OpenCode, alongside Claude Code. Through OpenCode we can now run open-source models (Kimi, DeepSeek, and others).</p>
+        <p>The added benefit: we can now mix and match models within a single task. One user story can run Claude Opus for the planning, Claude Sonnet for the implementation, Codex for the code review, and an open-source model to manage the PR: monitor the CI, fix conflicts, push to merge. Each step of the pipeline picks the model that fits.</p>
+        <p><strong>The bigger lesson</strong>: we figured out how to successfully work <em>with</em> a coding agent. That lesson is platform-agnostic. The supplier we use to apply it may change, the workflow stands.</p>
+
+        <h2>And some good news</h2>
+        <p>Back in February, we had a bug: Claude subprocesses were defaulting to Sonnet 3.7. We ran like that for two full weeks. We shipped dozens of tasks during this bug, unnoticed. Output quality was very similar.</p>
+        <p class="arrow">with a tight enough harness and a rigorous enough process, the choice of model matters way less than people think.</p>
+
+        <div class="opinion">
+          <span class="tag">&lt;unpopular opinion&gt;</span>
+          <p>For most web development task, the most powerful frontier models (Opus 4.7, GPT 5.5) is mostly a walking stick for a broken process. A solid development workflow alongside a robust harness gets you comparable velocity and quality with much less powerful models.</p>
+          <span class="tag">&lt;/unpopular opinion&gt;</span>
+        </div>
+
+        <p>That being said, I also anticipate that token usage optimisation will become more and more prevalent.</p>
+        <p>Back to the initial post I had prepared...</p>
+      </aside>
+
+      <h2>What didn't work, and why we built this tool</h2>
+      <p>We created this tool at the end of last year to address the issues we faced during our first 6 months of using coding agents.</p>
+
+      <h3>Failure mode, PRs accumulate</h3>
+      <p>The root cause was usually a combination of:</p>
+      <ul>
+        <li>The final PR is okayish, but getting it to a mergeable state needs a lot of back &amp; forth with the agent.</li>
+        <li>The PR looks ok but manual testing reveals issues, requiring again a lot of iteration with the agent before we can actually merge it.</li>
+        <li>The agent produces large PRs that are complex to review.</li>
+      </ul>
+      <p>We decided to solve all of these problems at the planning stage. Before development starts.</p>
+      <p>This is not a novel idea. We have twenty years of Agile, XP, and BDD literature on the subject. We just realised that when applying this to agents, magic happens.</p>
+      <ul>
+        <li><a href="https://martinfowler.com/bliki/ConversationalStories.html" target="_blank" rel="noopener">Fowler's <em>Conversational Stories</em></a></li>
+        <li><a href="https://ronjeffries.com/xprog/articles/expcardconversationconfirmation/" target="_blank" rel="noopener">Jeffries' <em>Card, Conversation, Confirmation</em></a></li>
+        <li><a href="https://www.manning.com/books/specification-by-example" target="_blank" rel="noopener">Adzic's <em>Specification by Example</em></a></li>
+      </ul>
+      <p class="arrow">concrete examples, co-authored between the human and the agent, are the cheapest place to surface disagreement before code is written.</p>
+      <p><strong>The plan is the centerpiece of the agentic development cycle.</strong> The quality of the final output is directly correlated with the quality of this plan.</p>
+      <p>Our failure mode was treating the plan artifact as disposable:</p>
+      <ul>
+        <li>We provided a description of the task (light prompt).</li>
+        <li>Claude Code wrote the plan into a temporary folder.</li>
+        <li>The plan existed only as a session-bound guideline.</li>
+      </ul>
+      <p><strong>A task is not a prompt. A task is a requirement with acceptance criteria.</strong></p>
+      <p>The task itself, the requirement, and the technical specification must all coexist as <strong>enduring artifacts that live alongside the implementation</strong>, not transient inputs to a single session.</p>
+      <p>Once the plan is detailed enough, and once the workflow ensures the agent rigorously executes it, we were finally able to produce PRs we could merge with zero, or minimal, back &amp; forth. PRs stopped accumulating.</p>
+      <p>I think the term "autonomous coding agent" is extremely misleading. It focuses on time reduction rather than time investment. We had way better results once we shifted our focus to the HITL part of the process: where do we need to spend our time? At what stage of the workflow? In order to produce what?</p>
+      <p>It became quite obvious that we were wasting time at the end of the process, the PR stage naturally produces a bottleneck. We created this tool to help us invest our time at the beginning of the process instead, and have all downstream steps of the workflow as autonomous as possible.</p>
+
+      <h2>What finally worked</h2>
+      <p>We started to get great results once we finally managed to get Claude to behave just like a human developer.</p>
+      <p>Typical web-dev workflow:</p>
+      <ul>
+        <li>Plan</li>
+        <li>Implem + unit tests</li>
+        <li>Manual testing locally</li>
+        <li>PR -&gt; CI green</li>
+        <li>Code review, feedback, update PR, iterate</li>
+      </ul>
+
+      <h2>Opinionated decisions we made along the way</h2>
+      <p>Bottega is an attempt at automating this workflow in a simple and user-friendly manner.</p>
+      <p>As we ran more and more tasks in parallel, we decided that running this flow on a developer laptop made no sense. Why should the work stop if I close my laptop?</p>
+      <p>We quickly decided to set up this tool on a remote VPS.</p>
+      <ul>
+        <li><strong>Bonus 1:</strong> in terms of security, running these agents with skip-permission is less scary on a sandboxed VPS than on a local laptop.</li>
+        <li><strong>Bonus 2:</strong> once the tool was accessible via a simple browser, everyone in the company started using it, not only developers (more on that later).</li>
+      </ul>
+
+      <h2>Plan as the first-class citizen</h2>
+      <p>We use a plan template. A planning agent has a single goal: start from a task requirement and fill the plan template with a detailed technical implementation plan, interview the user, ask questions, etc.</p>
+      <p>The developer reviews the plan.</p>
+      <p>My personal conclusion is that the quality of the final PR is almost entirely dependent on the quality of this plan.</p>
+      <p>Crafting this plan is time consuming. I spend &gt;50% of my time at this stage. The goal is to minimize the amount of surprise at the PR stage. If the PR is just a simple reflection of the plan, usually the PR can be accepted right away.</p>
+      <p class="arrow">Highly interactive stage.</p>
+
+      <h2>Getting an implementation that matches the plan 100%</h2>
+      <p>Once the plan is approved, an implementation agent executes it. As soon as it's done, an adversarial code review agent kicks in, its job is to make sure the implementation strictly matches the plan and that no checkbox was silently skipped.</p>
+      <p>This is now a well known concept: the Ralph Wiggum loop</p>
+      <p>The two agents iterate until the reviewer is satisfied</p>
+
+      <h2>Manual testing</h2>
+      <p>The plan must include manual testing scenarios, e.g.:</p>
+      <ul>
+        <li>playwright</li>
+        <li>curl</li>
+        <li>running a script</li>
+        <li>etc.</li>
+      </ul>
+      <p>The agent runs these scenarios itself, just like a developer would before opening a PR.</p>
+      <p>This step was the major unlock: over the past few months, almost all issues discovered after a PR was written were due to acceptance criteria that were overlooked or missed during the planning phase (cf final quality of PR = quality of the specification). Once we got this step right we reached a level of quality similar to that of manual development. Software is rarely perfect: bugs happen, and most of the time, they are the result of scenarios that were genuinely missed during the feature design phase.</p>
+
+      <h2>PR management</h2>
+      <p>The agent creates the PR, then iterates until there are no conflicts and CI is green.</p>
+      <p>If I leave a comment on GitHub, it triggers a new agent run via a GitHub callback, again, the agent ensures CI stays green and solves any new conflicts that appear in the meantime.</p>
+
+      <h2>Yet another orchestration tool</h2>
+      <p>As we were working on this, a bunch of orchestration tools emerged. Variants of the same workflow we were converging on.</p>
+      <ul>
+        <li><a href="https://www.conductor.build/" target="_blank" rel="noopener">Conductor</a>, by Melty Labs (YC S24).</li>
+        <li><a href="https://github.com/steveyegge/gastown" target="_blank" rel="noopener">GasTown</a>, by Steve Yegge.</li>
+        <li><a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener">gstack</a>, by Garry Tan.</li>
+        <li><a href="https://github.com/github/spec-kit" target="_blank" rel="noopener">SpecKit</a>, by GitHub.</li>
+      </ul>
+      <p>There is a lot of overlap with what we built. For us, this is a huge confirmation that we were on the right path.</p>
+      <p>Where Bottega differs:</p>
+      <p><strong>Remote-first and multi-player.</strong> While you can run it on your laptop, Bottega is remote-first by design, we run it on a shared dev box. It has multiple concurrent users management out of the box. Side benefit1: sandboxing autonomous agents on a remote server was easier for us than sandboxing them on each laptop. Side benefit2: a lot of non-technical people use it internally.</p>
+      <p><strong>Minimalist UX.</strong> The core ideas are super simple: we are just recreating the typical web developer workflow. And we wanted the tool to reflect that simplicity. Side benefit: easy to onboard the whole product team.</p>
+
+      <hr />
+
+      <p>That's the core of it. The repo is here: <a href="https://github.com/vdaubry/bottega" target="_blank" rel="noopener">github.com/vdaubry/bottega</a>.</p>
+      <p>If you're building something similar, or you disagree with any of this, I'd love to hear from you.</p>
+
+      <footer class="post-foot">
+        <p>Vincent Daubry · <a href="https://x.com/vdaubry" target="_blank" rel="noopener">@vdaubry</a></p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
