@@ -159,7 +159,7 @@
         <p>Just when I was opensourcing this project, I love the irony. But Bottega's orchestration layer is easily extendable to add support for multiple providers.</p>
         <p>So following Anthropic's pricing announcement, we added support for Codex and OpenCode, alongside Claude Code. Through OpenCode we can now run open-source models (Kimi, DeepSeek, and others).</p>
         <p>The added benefit: we can now mix and match models within a single task. One user story can run Claude Opus for the planning, Claude Sonnet for the implementation, Codex for the code review, and an open-source model to manage the PR: monitor the CI, fix conflicts, push to merge. Each step of the pipeline picks the model that fits.</p>
-        <p><strong>The bigger lesson</strong>: we figured out how to successfully work <em>with</em> a coding agent. That lesson is platform-agnostic. The supplier we use to apply it may change, the workflow stands.</p>
+        <p><strong>Our conclusion</strong>: we figured out how to successfully work <em>with</em> a coding agent. That lesson is platform-agnostic.</p>
 
         <h2>And some good news</h2>
         <p>Back in February, we had a bug on Bottega: Claude subprocesses were defaulting to Sonnet 3.7. We ran like that for two full weeks. We shipped dozens of tasks during this bug, unnoticed. Output quality was very similar.</p>
